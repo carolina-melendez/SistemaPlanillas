@@ -43,11 +43,13 @@ class PaisController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pais $pais)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'nombre' => 'required|string|max:255',
         ]);
+
+        $pais = Pais::findOrFail($id);
 
         $pais->update($validated);
         return response()->json($pais);

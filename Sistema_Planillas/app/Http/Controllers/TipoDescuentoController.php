@@ -43,11 +43,13 @@ class TipoDescuentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TipoDescuento $tipoDescuento)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'descripcion' => 'sometimes|required|string|max:255',
         ]);
+
+        $tipoDescuento = TipoDescuento::findOrFail($id);
 
         $tipoDescuento->update($request->all());
 
