@@ -15,10 +15,10 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 RUN mkdir -p /var/log/apache2
 
 # Copiar el archivo de configuración del vhost
-COPY .docker/httpd-vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY Sistema_Planillas/.docker/httpd-vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Copiar los archivos del proyecto
-COPY . /var/www/html
+COPY Sistema_Planillas/ /var/www/html
 
 # Establecer permisos
 RUN chown -R www-data:www-data /var/www/html
