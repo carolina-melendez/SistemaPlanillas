@@ -15,7 +15,7 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN a2enmod rewrite
 
 # Configurar el nombre del servidor en Apache
-RUN echo "ServerName sistemaplanillas.onrender.com" >> /etc/apache2/apache2.conf
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Crear directorio de logs
 RUN mkdir -p /var/log/apache2
