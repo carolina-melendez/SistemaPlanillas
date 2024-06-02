@@ -14,6 +14,9 @@ RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 # Crear directorio de logs
 RUN mkdir -p /var/log/apache2
 
+# Copiar el archivo de configuración del vhost
+COPY .docker/httpd-vhost.conf /etc/apache2/sites-available/000-default.conf
+
 # Copiar los archivos del proyecto
 COPY . /var/www/html
 
