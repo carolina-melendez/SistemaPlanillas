@@ -15,17 +15,13 @@ RUN docker-php-ext-install pdo pdo_mysql
 RUN a2enmod rewrite
 
 # Configurar el nombre del servidor en Apache
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN echo "ServerName sistemaplanillas.onrender.com" >> /etc/apache2/apache2.conf
+
+# Crear directorio de logs
+RUN mkdir -p /var/log/apache2
 
 # Copiar los archivos del proyecto
 COPY . /var/www/html
-
-# Establecer el directorio de trabajo
-WORKDIR /var/www/html
-
-# Instalar dependencias de Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer install
 
 # Establecer permisos
 RUN chown -R www-data:www-data /var/www/html
