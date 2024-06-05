@@ -1,30 +1,36 @@
 FROM php:8.2-apache
 
-# Instalar dependencias necesarias
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    && docker-php-ext-install pdo pdo_pgsql
-
-# Configurar Apache
-RUN a2enmod rewrite
-
-# Configurar el nombre del servidor en Apache
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-
-# Crear directorio de logs
-RUN mkdir -p /var/log/apache2
-
-# Copiar el archivo de configuración del vhost
-COPY Sistema_Planillas/.docker/httpd-vhost.conf /etc/apache2/sites-available/000-default.conf
-
-# Copiar los archivos del proyecto
-COPY Sistema_Planillas/ /var/www/html
-
-# Establecer permisos
-RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html
-
-# Exponer el puerto 80
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+# Install dependencies
+RUN apt-get update -y && apt-get -y install curl libpq-dev zlib1g-dev libpng-dev libzip-dev
+#&& apt-get -y install git zlib1g-dev libpng-dev libzip-dev curl nano
+RUN docker-php-ext-install pgsql pdo pdo_pgsql gd \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip
+
+# Enable mod_rewrite
+RUN a2enmod rewrite
+
+# Copy Apache configuration and PHP configuration
+COPY vhost.conf /etc/apache2/sites-available/000-default.conf
+# COPY php.ini "$PHP_INI_DIR/php.ini"
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# Set working directory
+WORKDIR /app
+
+# Copy source code
+COPY . /app
+
+# Ensure deploy.sh is executable
+RUN chmod +x /app/deploy.sh
+
+# Set environment variable for Composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+
+# Run the deploy script and then start Apache
+CMD ["/bin/bash", "-c", "/app/deploy.sh && a2enmod rewrite"]
+ 
