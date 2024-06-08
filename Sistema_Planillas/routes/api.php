@@ -159,3 +159,6 @@ Route::post('/tipo_documento', [TipoDocumentoController::class, 'store']);
 Route::put('/tipo_documento{id}', [TipoDocumentoController::class, 'update']);
 Route::patch('/tipo_documento/{id}', [TipoDocumentoController::class, 'update']);
 Route::delete('/tipo_documento/{id}', [TipoDocumentoController::class, 'destroy']);
+
+// Rutas para los permisos
+Route::get('permissions', 'PermissionController@index')->name('permissions.index');
