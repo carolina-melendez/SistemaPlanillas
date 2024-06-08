@@ -28,11 +28,11 @@ Route::group([
 ], function ($router) {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/password_reset', [AuthController::class, 'resetPassword'])->name('password.reset');
     Route::group(['middleware' => 'auth:api'], function() {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
         Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
         Route::post('/me', [AuthController::class, 'me'])->name('me');
-        Route::post('/password_reset', [AuthController::class, 'resetPassword'])->name('password.reset');
     });
 });
 

@@ -170,16 +170,10 @@ class AuthController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $token = $request->bearerToken();
-
         $user = User::where('email', $request->email)->first();
 
         if (!$user) {
             return response()->json(['error' => 'Correo electrónico no encontrado'], 404);
-        }
-
-        if (!$token) {
-            return response()->json(['error' => 'Token inválido'], 400);
         }
 
         $user->password = Hash::make($request->password);
@@ -187,5 +181,6 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Restablecimiento de contraseña exitoso'], 200);
     }
+
 
 }
