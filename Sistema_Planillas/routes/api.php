@@ -20,6 +20,9 @@ use App\Http\Controllers\ProfesionController;
 use App\Models\TipoDocumento;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\EmpleadoDescuentoController;
+use App\Http\Controllers\EmpleadoIngresoController;
+use App\Http\Controllers\PlanillaController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -168,3 +171,28 @@ Route::get('/permission', [PermissionController::class, 'index']);
 // Rutas para el usuario
 Route::get('/user', [UsuarioController::class, 'index']);
 Route::delete('/user/{id}', [UsuarioController::class, 'destroy']);
+
+//Rutas para Empleado Descuento
+Route::get('/empleado_descuento', [EmpleadoDescuentoController::class, 'index']);
+Route::get('/empleado_descuento/{id}', [EmpleadoDescuentoController::class, 'show']);
+Route::post('/empleado_descuento', [EmpleadoDescuentoController::class, 'store']);
+Route::put('/empleado_descuento/{id}', [EmpleadoDescuentoController::class, 'update']);
+Route::patch('/empleado_descuento/{id}', [EmpleadoDescuentoController::class, 'update']);
+Route::delete('/empleado_descuento/{id}', [EmpleadoDescuentoController::class, 'destroy']);
+
+//Rutas para Empleado Descuento
+Route::get('/empleado_ingreso', [EmpleadoIngresoController::class, 'index']);
+Route::get('/empleado_ingreso/{id}', [EmpleadoIngresoController::class, 'show']);
+Route::post('/empleado_ingreso', [EmpleadoIngresoController::class, 'store']);
+Route::put('/empleado_ingreso/{id}', [EmpleadoIngresoController::class, 'update']);
+Route::patch('/empleado_ingreso/{id}', [EmpleadoIngresoController::class, 'update']);
+Route::delete('/empleado_ingreso/{id}', [EmpleadoIngresoController::class, 'destroy']);
+
+//Rutas para Empleado Descuento
+Route::get('/planilla', [PlanillaController::class, 'index']);
+Route::get('/planilla/{id}', [PlanillaController::class, 'show']);
+Route::post('/planilla', [PlanillaController::class, 'store']);
+Route::put('/planilla/{id}', [PlanillaController::class, 'update']);
+Route::patch('/planilla/{id}', [PlanillaController::class, 'update']);
+Route::delete('/planilla/{id}', [PlanillaController::class, 'destroy']);
+Route::get('/buscar_empleados', [PlanillaController::class, 'buscarEmpleadosPorRango']);
