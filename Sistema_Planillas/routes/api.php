@@ -18,6 +18,8 @@ use App\Http\Controllers\TipoDescuentoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ProfesionController;
 use App\Models\TipoDocumento;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UsuarioController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -161,4 +163,8 @@ Route::patch('/tipo_documento/{id}', [TipoDocumentoController::class, 'update'])
 Route::delete('/tipo_documento/{id}', [TipoDocumentoController::class, 'destroy']);
 
 // Rutas para los permisos
-Route::get('permissions', 'PermissionController@index')->name('permissions.index');
+Route::get('/permission', [PermissionController::class, 'index']);
+
+// Rutas para el usuario
+Route::get('/user', [UsuarioController::class, 'index']);
+Route::delete('/user/{id}', [UsuarioController::class, 'destroy']);

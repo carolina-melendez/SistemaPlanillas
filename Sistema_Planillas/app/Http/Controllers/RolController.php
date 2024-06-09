@@ -16,7 +16,7 @@ class RolController extends Controller
      */
     public function index()
     {
-        $roles = DB::table('roles')->paginate(10);
+        $roles = DB::table('roles')->get()->all();
         $data=[
             'roles'=>$roles,
             'status'=>200
