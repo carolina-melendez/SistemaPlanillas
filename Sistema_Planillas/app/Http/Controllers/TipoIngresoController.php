@@ -47,12 +47,13 @@ class TipoIngresoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TipoIngreso $tipoIngreso)
+    public function update(Request $request, string $id)
     {
         $validated = $request->validate([
             'descripcion' => 'required|string|max:255',
         ]);
 
+        $tipoIngreso = TipoIngreso::findOrFail($id);
         $tipoIngreso->update($validated);
         return response()->json($tipoIngreso);
     }
@@ -60,8 +61,9 @@ class TipoIngresoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TipoIngreso $tipoIngreso)
+    public function destroy(string $id)
     {
+        $tipoIngreso = TipoIngreso::findOrFail($id);
         $tipoIngreso->delete();
         return response()->json(null, 204);
     }

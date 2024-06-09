@@ -41,6 +41,8 @@ class Empleado extends Model
         'sexo',
         'fecha_contratacion',
         'fecha_despido',
+        'correo_personal',
+        'telefono_contacto'
     ];
 
     public function tipoDocumento()

@@ -64,6 +64,8 @@ class EmpleadoController extends Controller
             'sexo' => 'required|in:masculino,femenino',
             'fecha_contratacion' => 'required|date',
             'fecha_despido' => 'nullable|date',
+            'correo_personal' => 'required|string|email|max:255',
+            'telefono_contacto' => 'required|string',
         ]);
 
         $empleado = Empleado::create($validated);
@@ -124,6 +126,8 @@ class EmpleadoController extends Controller
             'sexo' => 'required|in:masculino,femenino',
             'fecha_contratacion' => 'required|date',
             'fecha_despido' => 'nullable|date',
+            'correo_personal' => 'required|string|email|max:255',
+            'telefono_contacto' => 'required|string',
         ]);
 
         $empleado->update($validatedData);
