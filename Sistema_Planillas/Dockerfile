@@ -26,9 +26,6 @@ WORKDIR /app
 # Copy source code
 COPY . /app
 
-# Copy .env file
-COPY .env /app/.env
-
 # Ensure deploy.sh is executable
 RUN chmod +x /app/deploy.sh
 
