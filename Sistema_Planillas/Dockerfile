@@ -12,6 +12,7 @@ RUN docker-php-ext-install pgsql pdo pdo_pgsql gd \
 # Enable mod_rewrite
 RUN a2enmod rewrite
 
+
 # Copy Apache configuration and PHP configuration
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 # COPY php.ini "$PHP_INI_DIR/php.ini"
@@ -24,6 +25,9 @@ WORKDIR /app
 
 # Copy source code
 COPY . /app
+
+# Copy .env file
+COPY .env /app/.env
 
 # Ensure deploy.sh is executable
 RUN chmod +x /app/deploy.sh
